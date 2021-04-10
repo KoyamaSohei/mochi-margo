@@ -44,7 +44,7 @@ runs:
       eval `/opt/spack/bin/spack env activate --sh .` &&
       ./prepare.sh &&
       mkdir build && cd build &&
-      export CFLAGS="{{inputs.CFLAGS}}" && 
-      export LDFLAGS="{{inputs.LDFLAGS}}" &&
+      export CFLAGS="${{inputs.CFLAGS}}" && 
+      export LDFLAGS="${{inputs.LDFLAGS}}" &&
       echo $CFLAGS && echo $LDFLAGS && 
       ../configure --prefix=`pwd`
