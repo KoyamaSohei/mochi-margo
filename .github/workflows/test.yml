@@ -21,7 +21,7 @@ jobs:
     - name: Show test-suite.log if test failed
       if: failure() && steps.test.outcome == 'failure'
       run: |
-        echo build/test-suite.log
+        cat build/test-suite.log
   asan:
     runs-on: ubuntu-latest
     steps:
@@ -43,4 +43,4 @@ jobs:
     - name: Show test-suite.log if test failed
       if: failure() && steps.asan-test.outcome == 'failure'
       run: |
-        echo asan-build/test-suite.log
+        cat asan-build/test-suite.log
