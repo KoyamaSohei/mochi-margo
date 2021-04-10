@@ -46,4 +46,5 @@ runs:
       mkdir build && cd build &&
       export CFLAGS="{{inputs.CFLAGS}}" && 
       export LDFLAGS="{{inputs.LDFLAGS}}" &&
+      echo $CFLAGS && echo $LDFLAGS && 
       ../configure --prefix=`pwd`
