@@ -10,7 +10,10 @@ jobs:
       uses: actions/checkout@v2
     - name: Configure 
       uses: ./.github
+      with:
+        builddir: build
     - name: Run test
       run: |
         eval `/opt/spack/bin/spack env activate --sh .` &&
+        cd build && 
         make check

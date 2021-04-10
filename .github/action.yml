@@ -9,6 +9,9 @@ inputs:
     description: 'LDFLAGS is envronment variable on ./configure'
     required: false
     default: ''
+  builddir:
+    description: 'builddir is where ./configure runs'
+    required: true
 runs:
   using: composite
   steps:
@@ -43,8 +46,7 @@ runs:
     run: |
       eval `/opt/spack/bin/spack env activate --sh .` &&
       ./prepare.sh &&
-      mkdir build && cd build &&
+      mkdir ${{inputs.builddir}} && cd ${{inputs.builddir}} &&
       export CFLAGS="${{inputs.CFLAGS}}" && 
       export LDFLAGS="${{inputs.LDFLAGS}}" &&
-      echo $CFLAGS && echo $LDFLAGS && 
       ../configure --prefix=`pwd`
