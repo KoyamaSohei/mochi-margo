@@ -13,10 +13,15 @@ jobs:
       with:
         builddir: build
     - name: Run test
+      id: test
       run: |
         eval `/opt/spack/bin/spack env activate --sh .` &&
         cd build &&
         make check
+    - name: Show test-suite.log if test failed
+      if: failure() && steps.test.outcome == 'failure'
+      run: |
+        echo build/test-suite.log
   asan:
     runs-on: ubuntu-latest
     steps:
@@ -29,8 +34,13 @@ jobs:
         CFLAGS: '-fsanitize=address -fno-omit-frame-pointer -g -Wall'
         LDFLAGS: '-fsanitize=address'
     - name: Run test
+      id: asan-test
       run: |
         eval `/opt/spack/bin/spack env activate --sh .` &&
         cd asan-build &&
         export ASAN_OPTIONS="abort_on_error=1" &&
         make check
+    - name: Show test-suite.log if test failed
+      if: failure() && steps.asan-test.outcome == 'failure'
+      run: |
+        echo asan-build/test-suite.log
