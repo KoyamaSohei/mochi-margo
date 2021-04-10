@@ -41,12 +41,12 @@ runs:
     run: |
       eval `/opt/spack/bin/spack env activate --sh .` &&
       /opt/spack/bin/spack find -dlv
-  - name: Configure 
+  - name: Configure
     shell: bash
     run: |
       eval `/opt/spack/bin/spack env activate --sh .` &&
       ./prepare.sh &&
       mkdir ${{inputs.builddir}} && cd ${{inputs.builddir}} &&
-      export CFLAGS="${{inputs.CFLAGS}}" && 
+      export CFLAGS="${{inputs.CFLAGS}}" &&
       export LDFLAGS="${{inputs.LDFLAGS}}" &&
       ../configure --prefix=`pwd`

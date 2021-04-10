@@ -15,7 +15,7 @@ jobs:
     - name: Run test
       run: |
         eval `/opt/spack/bin/spack env activate --sh .` &&
-        cd build && 
+        cd build &&
         make check
   asan:
     runs-on: ubuntu-latest
@@ -25,12 +25,12 @@ jobs:
     - name: Configure
       uses: ./.github
       with:
-        builddir: build
+        builddir: asan-build
         CFLAGS: '-fsanitize=address -fno-omit-frame-pointer -g -Wall'
         LDFLAGS: '-fsanitize=address'
     - name: Run test
       run: |
         eval `/opt/spack/bin/spack env activate --sh .` &&
-        cd build &&
+        cd asan-build &&
         export ASAN_OPTIONS="abort_on_error=1" &&
         make check
